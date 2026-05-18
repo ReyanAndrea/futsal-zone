@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Login - FutsalZone</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-green-50 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+
+    <div class="text-center mb-8">
+      <h1 class="text-3xl font-bold text-green-700">⚽ FutsalZone</h1>
+      <p class="text-gray-500 mt-1">Login Admin</p>
+    </div>
+
+    {{-- Flash Error --}}
+    @if(flashMessages.has('error'))
+      <div class="bg-red-100 text-red-700 px-4 py-3 rounded-xl mb-4 text-sm">
+        {{ flashMessages.get('error') }}
+      </div>
+    @end
+
+    <form action="/admin/login" method="POST">
+      {{ csrfField() }}
+
+      <div class="mb-4">
+        <label class="block text-gray-700 font-medium mb-1">Email</label>
+        <input type="email" name="email" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          placeholder="admin@futsalzone.com" />
+      </div>
+
+      <div class="mb-6">
+        <label class="block text-gray-700 font-medium mb-1">Password</label>
+        <input type="password" name="password" required
+          class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          placeholder="••••••••" />
+      </div>
+
+      <button type="submit"
+        class="w-full bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800 transition">
+        Login
+      </button>
+    </form>
+
+    <a href="/" class="block text-center text-gray-400 mt-4 hover:text-gray-600 transition text-sm">
+      ← Kembali ke Home
+    </a>
+
+  </div>
+
+</body>
+</html>
