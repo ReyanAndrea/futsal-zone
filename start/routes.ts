@@ -1,30 +1,36 @@
-/*
-|--------------------------------------------------------------------------
-| Routes file
-|--------------------------------------------------------------------------
-|
-| The routes file is used for defining the HTTP routes.
-|
-*/
-
-import { middleware } from '#start/kernel'
-import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
+import { middleware } from './kernel.js'
+import LapangansController from '#controllers/lapangans_controller'
+import AdminController from '#controllers/admin_controller'
 
-router.on('/').render('pages/home').as('home')
+// =====================
+// PUBLIC ROUTES
+// =====================
+router.get('/', [LapangansController, 'index'])
+router.get('/lapangan/:id', [LapangansController, 'show'])
+router.get('/booking/success', [LapangansController, 'bookingSuccess'])
+router.get('/booking/my', [LapangansController, 'myBookings'])
+router.get('/booking/:id', [LapangansController, 'bookingForm'])
+router.post('/booking/:id', [LapangansController, 'bookingStore'])
 
-router
-  .group(() => {
-    router.get('signup', [controllers.NewAccount, 'create'])
-    router.post('signup', [controllers.NewAccount, 'store'])
+// =====================
+// AUTH ROUTES
+// =====================
+router.get('/admin/login', [AdminController, 'loginForm'])
+router.post('/admin/login', [AdminController, 'login'])
+router.post('/admin/logout', [AdminController, 'logout'])
 
-    router.get('login', [controllers.Session, 'create'])
-    router.post('login', [controllers.Session, 'store'])
-  })
-  .use(middleware.guest())
-
-router
-  .group(() => {
-    router.post('logout', [controllers.Session, 'destroy'])
-  })
-  .use(middleware.auth())
+// =====================
+// ADMIN ROUTES (protected)
+// =====================
+router.group(() => {
+  router.get('/admin/dashboard', [AdminController, 'dashboard'])
+  router.get('/admin/lapangan', [AdminController, 'lapanganIndex'])
+  router.get('/admin/lapangan/create', [AdminController, 'lapanganCreate'])
+  router.post('/admin/lapangan', [AdminController, 'lapanganStore'])
+  router.get('/admin/lapangan/:id/edit', [AdminController, 'lapanganEdit'])
+  router.post('/admin/lapangan/:id', [AdminController, 'lapanganUpdate'])
+  router.post('/admin/lapangan/:id/delete', [AdminController, 'lapanganDelete'])
+  router.get('/admin/bookings', [AdminController, 'bookingsIndex'])
+  router.post('/admin/bookings/:id/status', [AdminController, 'bookingUpdateStatus'])
+}).use(middleware.auth())
