@@ -1,0 +1,52 @@
+@layout('components/layout')
+  @slot('main')
+    <div class="max-w-3xl mx-auto">
+
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">📋 Booking Saya</h1>
+      <p class="text-gray-500 mb-6">Riwayat booking lapangan futsal Anda.</p>
+
+      @if(bookings.length == 0)
+        <div class="text-center text-gray-400 py-16 bg-white rounded-2xl shadow">
+          <div class="text-6xl mb-4">📭</div>
+          <p class="text-xl font-semibold mb-2">Belum ada booking</p>
+          <p class="text-sm mb-6">Anda belum pernah melakukan booking di perangkat ini.</p>
+          <a href="/" class="bg-green-700 text-white px-6 py-3 rounded-xl hover:bg-green-800 transition font-semibold">
+            Booking Sekarang
+          </a>
+        </div>
+      @else
+        <div class="flex flex-col gap-4">
+          @each(booking in bookings)
+            <div class="bg-white rounded-2xl shadow p-6">
+              <div class="flex justify-between items-start mb-3">
+                <div>
+                  <h3 class="text-xl font-bold text-gray-800">{{ booking.lapangan.nama }}</h3>
+                  <p class="text-gray-500 text-sm">{{ booking.tanggal }} | {{ booking.jamMulai }} - {{ booking.jamSelesai }}</p>
+                </div>
+                @if(booking.status === 'confirmed')
+                  <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">✅ Confirmed</span>
+                @elseif(booking.status === 'pending')
+                  <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">⏳ Pending</span>
+                @else
+                  <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">❌ Cancelled</span>
+                @end
+              </div>
+              <div class="border-t pt-3 flex justify-between items-center">
+                <div>
+                  <p class="text-gray-500 text-sm">Atas nama: <span class="font-semibold text-gray-700">{{ booking.namaPemesan }}</span></p>
+                  <p class="text-gray-500 text-sm">No. HP: <span class="font-semibold text-gray-700">{{ booking.noTelepon }}</span></p>
+                </div>
+                <p class="text-green-700 font-bold text-lg">Rp {{ Number(booking.totalHarga).toLocaleString('id-ID') }}</p>
+              </div>
+            </div>
+          @end
+        </div>
+      @end
+
+      <a href="/" class="block text-center text-gray-400 mt-6 hover:text-gray-600 transition">
+        ← Kembali ke Home
+      </a>
+
+    </div>
+  @end
+@end
