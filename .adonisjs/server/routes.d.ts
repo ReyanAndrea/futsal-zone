@@ -4,27 +4,59 @@ type ParamValue = string | number | bigint | boolean
 
 export type ScannedRoutes = {
   ALL: {
-    'home': { paramsTuple?: []; params?: {} }
-    'new_account.create': { paramsTuple?: []; params?: {} }
-    'new_account.store': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
-    'session.store': { paramsTuple?: []; params?: {} }
-    'session.destroy': { paramsTuple?: []; params?: {} }
+    'lapangan.index': { paramsTuple?: []; params?: {} }
+    'lapangan.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'lapangan.booking_success': { paramsTuple?: []; params?: {} }
+    'lapangan.my_bookings': { paramsTuple?: []; params?: {} }
+    'lapangan.booking_form': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'lapangan.booking_store': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.login_form': { paramsTuple?: []; params?: {} }
+    'admin.login': { paramsTuple?: []; params?: {} }
+    'admin.logout': { paramsTuple?: []; params?: {} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_index': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_create': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_store': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.lapangan_update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.lapangan_delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.bookings_index': { paramsTuple?: []; params?: {} }
+    'admin.booking_update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
   GET: {
-    'home': { paramsTuple?: []; params?: {} }
-    'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'lapangan.index': { paramsTuple?: []; params?: {} }
+    'lapangan.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'lapangan.booking_success': { paramsTuple?: []; params?: {} }
+    'lapangan.my_bookings': { paramsTuple?: []; params?: {} }
+    'lapangan.booking_form': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.login_form': { paramsTuple?: []; params?: {} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_index': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_create': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.bookings_index': { paramsTuple?: []; params?: {} }
   }
   HEAD: {
-    'home': { paramsTuple?: []; params?: {} }
-    'new_account.create': { paramsTuple?: []; params?: {} }
-    'session.create': { paramsTuple?: []; params?: {} }
+    'lapangan.index': { paramsTuple?: []; params?: {} }
+    'lapangan.show': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'lapangan.booking_success': { paramsTuple?: []; params?: {} }
+    'lapangan.my_bookings': { paramsTuple?: []; params?: {} }
+    'lapangan.booking_form': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.login_form': { paramsTuple?: []; params?: {} }
+    'admin.dashboard': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_index': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_create': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_edit': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.bookings_index': { paramsTuple?: []; params?: {} }
   }
   POST: {
-    'new_account.store': { paramsTuple?: []; params?: {} }
-    'session.store': { paramsTuple?: []; params?: {} }
-    'session.destroy': { paramsTuple?: []; params?: {} }
+    'lapangan.booking_store': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.login': { paramsTuple?: []; params?: {} }
+    'admin.logout': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_store': { paramsTuple?: []; params?: {} }
+    'admin.lapangan_update': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.lapangan_delete': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
+    'admin.booking_update_status': { paramsTuple: [ParamValue]; params: {'id': ParamValue} }
   }
 }
 declare module '@adonisjs/core/types/http' {
