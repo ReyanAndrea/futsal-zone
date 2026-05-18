@@ -1,0 +1,68 @@
+@layout('components/layout')
+
+@slot('main')
+  <div class="max-w-2xl mx-auto">
+
+    <h1 class="text-3xl font-bold text-gray-800 mb-2">Form Booking</h1>
+    <p class="text-gray-500 mb-6">Lapangan: <span class="font-semibold text-green-700">{{ lapangan.nama }}</span></p>
+
+    <div class="bg-white rounded-2xl shadow p-6">
+      <form action="/booking/{{ lapangan.id }}" method="POST">
+        {{ csrfField() }}
+
+        {{-- Nama Pemesan --}}
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-1">Nama Pemesan</label>
+          <input type="text" name="nama_pemesan" required
+            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            placeholder="Masukkan nama lengkap" />
+        </div>
+
+        {{-- No Telepon --}}
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-1">No. Telepon</label>
+          <input type="text" name="no_telepon" required
+            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+            placeholder="Contoh: 08123456789" />
+        </div>
+
+        {{-- Tanggal --}}
+        <div class="mb-4">
+          <label class="block text-gray-700 font-medium mb-1">Tanggal</label>
+          <input type="date" name="tanggal" required
+            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+        </div>
+
+        {{-- Jam Mulai & Selesai --}}
+        <div class="grid grid-cols-2 gap-4 mb-4">
+          <div>
+            <label class="block text-gray-700 font-medium mb-1">Jam Mulai</label>
+            <input type="time" name="jam_mulai" required
+              class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium mb-1">Jam Selesai</label>
+            <input type="time" name="jam_selesai" required
+              class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+          </div>
+        </div>
+
+        {{-- Info Harga --}}
+        <div class="bg-green-50 rounded-xl px-4 py-3 mb-6 text-green-700 text-sm">
+          Harga: <strong>Rp {{ Number(lapangan.hargaPerJam).toLocaleString('id-ID') }} / jam</strong>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800 transition">
+          Konfirmasi Booking
+        </button>
+      </form>
+    </div>
+
+    <a href="/lapangan/{{ lapangan.id }}" class="block text-center text-gray-400 mt-4 hover:text-gray-600 transition">
+      ← Kembali ke Detail Lapangan
+    </a>
+
+  </div>
+@end
+@end
