@@ -1,0 +1,54 @@
+@layout('admin/layout')
+  @slot('main')
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
+
+  {{-- Stats Cards --}}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+
+    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
+      <div class="text-4xl">🏟️</div>
+      <div>
+        <p class="text-gray-500 text-sm">Total Lapangan</p>
+        <p class="text-3xl font-bold text-green-700">{{ totalLapangan.$extras.total }}</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
+      <div class="text-4xl">📋</div>
+      <div>
+        <p class="text-gray-500 text-sm">Total Booking</p>
+        <p class="text-3xl font-bold text-blue-700">{{ totalBooking.$extras.total }}</p>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
+      <div class="text-4xl">⏳</div>
+      <div>
+        <p class="text-gray-500 text-sm">Booking Pending</p>
+        <p class="text-3xl font-bold text-yellow-600">{{ pendingBooking.$extras.total }}</p>
+      </div>
+    </div>
+
+  </div>
+
+  {{-- Quick Links --}}
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <a href="/admin/lapangan"
+      class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition flex items-center gap-4">
+      <div class="text-4xl">🏟️</div>
+      <div>
+        <p class="font-semibold text-gray-800">Kelola Lapangan</p>
+        <p class="text-gray-400 text-sm">Tambah, edit, atau hapus lapangan</p>
+      </div>
+    </a>
+    <a href="/admin/bookings"
+      class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition flex items-center gap-4">
+      <div class="text-4xl">📋</div>
+      <div>
+        <p class="font-semibold text-gray-800">Kelola Booking</p>
+        <p class="text-gray-400 text-sm">Konfirmasi atau tolak booking masuk</p>
+      </div>
+    </a>
+  </div>
+@end
+@end
