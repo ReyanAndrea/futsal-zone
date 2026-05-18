@@ -7,6 +7,54 @@
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
+export class BookingSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'jamMulai', 'jamSelesai', 'lapanganId', 'namaPemesan', 'noTelepon', 'status', 'tanggal', 'totalHarga', 'updatedAt'] as const
+  $columns = BookingSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare jamMulai: string
+  @column()
+  declare jamSelesai: string
+  @column()
+  declare lapanganId: number | null
+  @column()
+  declare namaPemesan: string
+  @column()
+  declare noTelepon: string
+  @column()
+  declare status: string | null
+  @column.date()
+  declare tanggal: DateTime
+  @column()
+  declare totalHarga: number
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
+export class LapanganSchema extends BaseModel {
+  static $columns = ['createdAt', 'deskripsi', 'foto', 'hargaPerJam', 'id', 'nama', 'status', 'updatedAt'] as const
+  $columns = LapanganSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column()
+  declare deskripsi: string | null
+  @column()
+  declare foto: string | null
+  @column()
+  declare hargaPerJam: number
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare nama: string
+  @column()
+  declare status: string | null
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class UserSchema extends BaseModel {
   static $columns = ['createdAt', 'email', 'fullName', 'id', 'password', 'updatedAt'] as const
   $columns = UserSchema.$columns
