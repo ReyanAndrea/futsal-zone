@@ -1,0 +1,71 @@
+@layout('admin/layout')
+
+@slot('main')
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Kelola Lapangan</h1>
+    <a href="/admin/lapangan/create"
+      class="bg-green-700 text-white px-5 py-2 rounded-xl hover:bg-green-800 transition font-semibold">
+      + Tambah Lapangan
+    </a>
+  </div>
+
+  <div class="bg-white rounded-2xl shadow overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-green-700 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left">No</th>
+          <th class="px-6 py-3 text-left">Nama</th>
+          <th class="px-6 py-3 text-left">Harga/Jam</th>
+          <th class="px-6 py-3 text-left">Status</th>
+          <th class="px-6 py-3 text-left">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(item in lapangan)
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="px-6 py-4">{{ item.id }}</td>
+            <td class="px-6 py-4 font-medium">{{ item.nama }}</td>
+            <td class="px-6 py-4">Rp {{ Number(item.hargaPerJam).toLocaleString('id-ID') }}</td>
+            <td class="px-6 py-4">
+              @if(item.status === 'aktif')
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Aktif</span>
+              @else
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">Nonaktif</span>
+              @end
+            </td>
+            <td class="px-6 py-4 flex gap-2">
+              <a href="/admin/lapangan/{{ item.id }}/edit"
+                class="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg hover:bg-blue-200 transition text-xs font-semibold">
+                Edit
+              </a>
+              <form action="/admin/lapangan/{{ item.id }}/delete" method="POST"
+                onsubmit="return confirm('Yakin hapus lapangan ini?')">
+                {{ csrfField() }}
+                <button type="submit"
+                  class="bg-red-100 text-red-700 px-3 py-1 rounded-lg hover:bg-red-200 transition text-xs font-semibold">
+                  Hapus
+                </button>
+              </form>
+            </td>
+          </tr>
+        @end
+      </tbody>
+    </table>
+
+    @if(lapangan.length == 0)
+      <div class="text-center text-gray-400 py-12">
+        Belum ada lapangan. <a href="/admin/lapangan/create" class="text-green-700 underline">Tambah sekarang</a>
+      </div>
+    @end
+
+  </div>
+
+  <div class="flex gap-2">
+    
+    <span class="text-gray-300">|</span>
+    <a href="/admin/dashboard" class="text-gray-400 hover:text-gray-600 transition text-sm">
+      🏠 Dashboard
+    </a>
+  </div>
+@end
+@end
