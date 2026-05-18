@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - FutsalZone</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+</head>
+<body class="bg-gray-100 min-h-screen flex">
+
+  {{-- Sidebar --}}
+  <aside class="w-64 bg-green-800 text-white min-h-screen flex flex-col">
+    <div class="px-6 py-6 border-b border-green-700">
+      <h1 class="text-xl font-bold">⚽ FutsalZone</h1>
+      <p class="text-green-300 text-sm">Admin Panel</p>
+    </div>
+    <nav class="flex-1 px-4 py-6 flex flex-col gap-2">
+      <a href="/admin/dashboard"
+        class="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-green-700 transition">
+        📊 Dashboard
+      </a>
+      <a href="/admin/lapangan"
+        class="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-green-700 transition">
+        🏟️ Lapangan
+      </a>
+      <a href="/admin/bookings"
+        class="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-green-700 transition">
+        📋 Bookings
+      </a>
+    </nav>
+    <div class="px-4 py-4 border-t border-green-700">
+      <form action="/admin/logout" method="POST">
+        {{ csrfField() }}
+        <button type="submit"
+          class="w-full text-left flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-green-700 transition text-red-300">
+          🚪 Logout
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  {{-- Main Content --}}
+  <div class="flex-1 flex flex-col">
+
+    {{-- Top Bar --}}
+    <header class="bg-white shadow px-8 py-4 flex justify-between items-center">
+      <h2 class="text-xl font-semibold text-gray-700">Admin Panel</h2>
+      <span class="text-gray-400 text-sm">FutsalZone Management</span>
+    </header>
+
+    {{-- Flash Messages --}}
+    @if(flashMessages.has('error'))
+      <div class="bg-red-100 text-red-700 px-8 py-3 text-sm">
+        {{ flashMessages.get('error') }}
+      </div>
+    @end
+    @if(flashMessages.has('success'))
+      <div class="bg-green-100 text-green-700 px-8 py-3 text-sm">
+        {{ flashMessages.get('success') }}
+      </div>
+    @end
+
+    <main class="flex-1 px-8 py-6">
+      @yieldsSection('main')
+    </main>
+
+  </div>
+
+</body>
+</html>
