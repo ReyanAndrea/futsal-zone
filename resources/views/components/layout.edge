@@ -1,19 +1,41 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="id">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      AdonisJS - A fully featured web framework for Node.js
-    </title>
+    <title>FutsalZone - Booking Lapangan Futsal</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('dumper')
   </head>
-  <body>
-    @include('partials/header')
-    <main>
-      @include('partials/flash_alerts')
+  <body class="bg-gray-50 min-h-screen">
+
+    <nav class="bg-green-700 text-white px-6 py-4 flex justify-between items-center shadow">
+      <a href="/" class="text-2xl font-bold tracking-wide">⚽ FutsalZone</a>
+      <div class="flex gap-4">
+        <a href="/" class="hover:text-green-200 transition">Home</a>
+        <a href="/booking/my" class="hover:text-green-200 transition">My Bookings</a>
+        <a href="/admin/login" class="hover:text-green-200 transition">Admin</a>
+      </div>
+    </nav>
+
+    @if(flashMessages.has('error'))
+      <div class="bg-red-100 text-red-700 px-6 py-3 text-sm">
+        {{ flashMessages.get('error') }}
+      </div>
+    @end
+    @if(flashMessages.has('success'))
+      <div class="bg-green-100 text-green-700 px-6 py-3 text-sm">
+        {{ flashMessages.get('success') }}
+      </div>
+    @end
+
+    <main class="px-6 py-8 max-w-6xl mx-auto">
       {{{ await $slots.main() }}}
     </main>
+
+    <footer class="text-center text-gray-400 text-sm py-6 mt-10 border-t">
+      © 2026 FutsalZone. All rights reserved.
+    </footer>
+
   </body>
 </html>
