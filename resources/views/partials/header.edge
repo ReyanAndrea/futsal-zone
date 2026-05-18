@@ -8,6 +8,7 @@
     <div>
       <nav>
         @if(auth.user)
+          @!link({ route: 'booking.my', text: 'My Bookings' })
           @!avatar({ initials: auth.user.initials })
           @form({ route: 'session.destroy', method: 'POST' })
             @!button({ text: 'Logout' })
