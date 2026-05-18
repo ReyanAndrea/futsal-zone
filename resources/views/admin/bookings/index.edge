@@ -1,0 +1,76 @@
+@layout('admin/layout')
+
+@slot('main')
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">Kelola Booking</h1>
+
+  <div class="bg-white rounded-2xl shadow overflow-hidden">
+    <table class="w-full text-sm">
+      <thead class="bg-green-700 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left">No</th>
+          <th class="px-6 py-3 text-left">Pemesan</th>
+          <th class="px-6 py-3 text-left">No. HP</th>
+          <th class="px-6 py-3 text-left">Lapangan</th>
+          <th class="px-6 py-3 text-left">Tanggal</th>
+          <th class="px-6 py-3 text-left">Jam</th>
+          <th class="px-6 py-3 text-left">Total</th>
+          <th class="px-6 py-3 text-left">Status</th>
+          <th class="px-6 py-3 text-left">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        @each(item in bookings)
+          <tr class="border-b hover:bg-gray-50 transition">
+            <td class="px-6 py-4">{{ item.id }}</td>
+            <td class="px-6 py-4 font-medium">{{ item.namaPemesan }}</td>
+            <td class="px-6 py-4">{{ item.noTelepon }}</td>
+            <td class="px-6 py-4">{{ item.lapangan.nama }}</td>
+            <td class="px-6 py-4">{{ item.tanggal }}</td>
+            <td class="px-6 py-4">{{ item.jamMulai }} - {{ item.jamSelesai }}</td>
+            <td class="px-6 py-4">Rp {{ Number(item.totalHarga).toLocaleString('id-ID') }}</td>
+            <td class="px-6 py-4">
+              @if(item.status === 'confirmed')
+                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Confirmed</span>
+              @elseif(item.status === 'pending')
+                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending</span>
+              @else
+                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">Cancelled</span>
+              @end
+            </td>
+            <td class="px-6 py-4">
+              <form action="/admin/bookings/{{ item.id }}/status" method="POST">
+                {{ csrfField() }}
+                <select name="status" onchange="this.form.submit()"
+                  class="border border-gray-300 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-green-500">
+                  <option value="pending" {{ item.status === 'pending' ? 'selected' : '' }}>Pending</option>
+                  <option value="confirmed" {{ item.status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                  <option value="cancelled" {{ item.status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                </select>
+              </form>
+            </td>
+          </tr>
+          
+        @end
+      </tbody>
+    </table>
+
+    
+
+    @if(bookings.length == 0)
+      <div class="text-center text-gray-400 py-12">
+        Belum ada booking masuk.
+      </div>
+    @end
+
+  </div>
+
+  <div class="flex gap-2">
+    
+    <span class="text-gray-300">|</span>
+    <a href="/admin/dashboard" class="text-gray-400 hover:text-gray-600 transition text-sm">
+      🏠 Dashboard
+    </a>
+  </div>
+</div>
+@end
+@end
