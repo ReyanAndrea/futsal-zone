@@ -1,70 +1,73 @@
 @layout('admin/layout')
+  @slot('main')
+    <div class="max-w-2xl">
 
-@slot('main')
-  <div class="max-w-2xl">
-
-    <div class="flex justify-between items-center mb-6">
-  <h1 class="text-2xl font-bold text-gray-800">Tambah Lapangan</h1>
-  <div class="flex gap-2">
-    <a href="/admin/lapangan" class="text-gray-400 hover:text-gray-600 transition text-sm">
-      ← Kembali ke Lapangan
-    </a>
-    <span class="text-gray-300">|</span>
-    <a href="/admin/dashboard" class="text-gray-400 hover:text-gray-600 transition text-sm">
-      🏠 Dashboard
-    </a>
-  </div>
-</div>
-
-    <div class="bg-white rounded-2xl shadow p-6">
-      <form action="/admin/lapangan/{{ lapangan.id }}" method="POST" enctype="multipart/form-data">
-        {{ csrfField() }}
-
-        <div class="mb-4">
-          <label class="block text-gray-700 font-medium mb-1">Nama Lapangan</label>
-          <input type="text" name="nama" required value="{{ lapangan.nama }}"
-            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-3xl font-extrabold text-gray-800">✏️ Edit Lapangan</h1>
+          <p class="text-gray-400 mt-1">Edit informasi lapangan futsal.</p>
         </div>
-
-        <div class="mb-4">
-          <label class="block text-gray-700 font-medium mb-1">Deskripsi</label>
-          <textarea name="deskripsi" rows="3"
-            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">{{ lapangan.deskripsi }}</textarea>
+        <div class="flex gap-3">
+          <a href="/admin/lapangan"
+            class="bg-gray-100 text-gray-600 px-5 py-2.5 rounded-2xl hover:bg-gray-200 transition font-bold text-sm">
+            ← Kembali
+          </a>
+          <a href="/admin/dashboard"
+            class="bg-gray-100 text-gray-600 px-5 py-2.5 rounded-2xl hover:bg-gray-200 transition font-bold text-sm">
+            🏠 Dashboard
+          </a>
         </div>
+      </div>
 
-        <div class="mb-4">
-  <label class="block text-gray-700 font-medium mb-1">Foto Lapangan</label>
-  @if(lapangan.foto)
-    <img src="/uploads/{{ lapangan.foto }}" class="w-full h-40 object-cover rounded-xl mb-2" />
-  @end
-  <input type="file" name="foto" accept="image/*"
-    class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
-  <p class="text-gray-400 text-xs mt-1">Kosongkan jika tidak ingin ganti foto</p>
-</div>
+      <div class="bg-white rounded-3xl shadow-md p-8">
+        <form action="/admin/lapangan/{{ lapangan.id }}" method="POST" enctype="multipart/form-data">
+          {{ csrfField() }}
 
-        <div class="mb-4">
-          <label class="block text-gray-700 font-medium mb-1">Harga per Jam (Rp)</label>
-          <input type="number" name="harga_per_jam" required value="{{ lapangan.hargaPerJam }}"
-            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500" />
-        </div>
+          <div class="mb-5">
+            <label class="block text-gray-600 font-semibold mb-2 text-sm">🏟️ Nama Lapangan</label>
+            <input type="text" name="nama" required value="{{ lapangan.nama }}"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50" />
+          </div>
 
-        <div class="mb-6">
-          <label class="block text-gray-700 font-medium mb-1">Status</label>
-          <select name="status"
-            class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500">
-            <option value="aktif" {{ lapangan.status === 'aktif' ? 'selected' : '' }}>Aktif</option>
-            <option value="nonaktif" {{ lapangan.status === 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
-          </select>
-        </div>
+          <div class="mb-5">
+            <label class="block text-gray-600 font-semibold mb-2 text-sm">📝 Deskripsi</label>
+            <textarea name="deskripsi" rows="3"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50">{{ lapangan.deskripsi }}</textarea>
+          </div>
 
-        <button type="submit"
-          class="w-full bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800 transition">
-          Update Lapangan
-        </button>
+          <div class="mb-5">
+            <label class="block text-gray-600 font-semibold mb-2 text-sm">📸 Foto Lapangan</label>
+            @if(lapangan.foto)
+              <img src="/uploads/{{ lapangan.foto }}" class="w-full h-48 object-cover rounded-2xl mb-3 shadow" />
+            @end
+            <input type="file" name="foto" accept="image/*"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50" />
+            <p class="text-gray-400 text-xs mt-1">Kosongkan jika tidak ingin ganti foto.</p>
+          </div>
 
-      </form>
+          <div class="mb-5">
+            <label class="block text-gray-600 font-semibold mb-2 text-sm">💰 Harga per Jam (Rp)</label>
+            <input type="number" name="harga_per_jam" required value="{{ lapangan.hargaPerJam }}"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50" />
+          </div>
+
+          <div class="mb-8">
+            <label class="block text-gray-600 font-semibold mb-2 text-sm">🔘 Status</label>
+            <select name="status"
+              class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50">
+              <option value="aktif" {{ lapangan.status === 'aktif' ? 'selected' : '' }}>✅ Aktif</option>
+              <option value="nonaktif" {{ lapangan.status === 'nonaktif' ? 'selected' : '' }}>❌ Nonaktif</option>
+            </select>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-green-800 hover:to-green-700 transition shadow-md">
+            💾 Update Lapangan
+          </button>
+
+        </form>
+      </div>
+
     </div>
-
-  </div>
-@end
+  @end
 @end
