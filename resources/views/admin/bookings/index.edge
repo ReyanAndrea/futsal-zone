@@ -1,76 +1,74 @@
 @layout('admin/layout')
-
-@slot('main')
-  <h1 class="text-2xl font-bold text-gray-800 mb-6">Kelola Booking</h1>
-
-  <div class="bg-white rounded-2xl shadow overflow-hidden">
-    <table class="w-full text-sm">
-      <thead class="bg-green-700 text-white">
-        <tr>
-          <th class="px-6 py-3 text-left">No</th>
-          <th class="px-6 py-3 text-left">Pemesan</th>
-          <th class="px-6 py-3 text-left">No. HP</th>
-          <th class="px-6 py-3 text-left">Lapangan</th>
-          <th class="px-6 py-3 text-left">Tanggal</th>
-          <th class="px-6 py-3 text-left">Jam</th>
-          <th class="px-6 py-3 text-left">Total</th>
-          <th class="px-6 py-3 text-left">Status</th>
-          <th class="px-6 py-3 text-left">Aksi</th>
-        </tr>
-      </thead>
-      <tbody>
-        @each(item in bookings)
-          <tr class="border-b hover:bg-gray-50 transition">
-            <td class="px-6 py-4">{{ item.id }}</td>
-            <td class="px-6 py-4 font-medium">{{ item.namaPemesan }}</td>
-            <td class="px-6 py-4">{{ item.noTelepon }}</td>
-            <td class="px-6 py-4">{{ item.lapangan.nama }}</td>
-            <td class="px-6 py-4">{{ item.tanggal }}</td>
-            <td class="px-6 py-4">{{ item.jamMulai }} - {{ item.jamSelesai }}</td>
-            <td class="px-6 py-4">Rp {{ Number(item.totalHarga).toLocaleString('id-ID') }}</td>
-            <td class="px-6 py-4">
-              @if(item.status === 'confirmed')
-                <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Confirmed</span>
-              @elseif(item.status === 'pending')
-                <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">Pending</span>
-              @else
-                <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">Cancelled</span>
-              @end
-            </td>
-            <td class="px-6 py-4">
-              <form action="/admin/bookings/{{ item.id }}/status" method="POST">
-                {{ csrfField() }}
-                <select name="status" onchange="this.form.submit()"
-                  class="border border-gray-300 rounded-lg px-2 py-1 text-xs focus:outline-none focus:ring-2 focus:ring-green-500">
-                  <option value="pending" {{ item.status === 'pending' ? 'selected' : '' }}>Pending</option>
-                  <option value="confirmed" {{ item.status === 'confirmed' ? 'selected' : '' }}>Confirmed</option>
-                  <option value="cancelled" {{ item.status === 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                </select>
-              </form>
-            </td>
-          </tr>
-          
-        @end
-      </tbody>
-    </table>
-
-    
-
-    @if(bookings.length == 0)
-      <div class="text-center text-gray-400 py-12">
-        Belum ada booking masuk.
+  @slot('main')
+    <div class="flex justify-between items-center mb-8">
+      <div>
+        <h1 class="text-3xl font-extrabold text-gray-800">📋 Kelola Booking</h1>
+        <p class="text-gray-400 mt-1">Manage semua booking masuk dari user.</p>
       </div>
-    @end
+      <a href="/admin/dashboard"
+        class="bg-gray-100 text-gray-600 px-6 py-3 rounded-2xl hover:bg-gray-200 transition font-bold text-sm">
+        ← Dashboard
+      </a>
+    </div>
 
-  </div>
+    <div class="bg-white rounded-3xl shadow-md overflow-hidden">
+      <table class="w-full text-sm">
+        <thead class="bg-gradient-to-r from-green-800 to-green-700 text-white">
+          <tr>
+            <th class="px-6 py-4 text-left">No</th>
+            <th class="px-6 py-4 text-left">Pemesan</th>
+            <th class="px-6 py-4 text-left">Lapangan</th>
+            <th class="px-6 py-4 text-left">Tanggal & Jam</th>
+            <th class="px-6 py-4 text-left">Total</th>
+            <th class="px-6 py-4 text-left">Status</th>
+            <th class="px-6 py-4 text-left">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          @each(item in bookings)
+            <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
+              <td class="px-6 py-4 text-gray-400">{{ item.id }}</td>
+              <td class="px-6 py-4">
+                <p class="font-bold text-gray-800">{{ item.namaPemesan }}</p>
+                <p class="text-gray-400 text-xs">📱 {{ item.noTelepon }}</p>
+              </td>
+              <td class="px-6 py-4 font-semibold text-gray-700">{{ item.lapangan.nama }}</td>
+              <td class="px-6 py-4">
+                <p class="font-semibold text-gray-700">📅 {{ item.tanggal }}</p>
+                <p class="text-gray-400 text-xs">🕐 {{ item.jamMulai }} - {{ item.jamSelesai }}</p>
+              </td>
+              <td class="px-6 py-4 text-green-700 font-bold">Rp {{ Number(item.totalHarga).toLocaleString('id-ID') }}</td>
+              <td class="px-6 py-4">
+                @if(item.status === 'confirmed')
+                  <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">✅ Confirmed</span>
+                @elseif(item.status === 'pending')
+                  <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-bold">⏳ Pending</span>
+                @else
+                  <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-bold">❌ Cancelled</span>
+                @end
+              </td>
+              <td class="px-6 py-4">
+                <form action="/admin/bookings/{{ item.id }}/status" method="POST">
+                  {{ csrfField() }}
+                  <select name="status" onchange="this.form.submit()"
+                    class="border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50 font-semibold">
+                    <option value="pending" {{ item.status === 'pending' ? 'selected' : '' }}>⏳ Pending</option>
+                    <option value="confirmed" {{ item.status === 'confirmed' ? 'selected' : '' }}>✅ Confirmed</option>
+                    <option value="cancelled" {{ item.status === 'cancelled' ? 'selected' : '' }}>❌ Cancelled</option>
+                  </select>
+                </form>
+              </td>
+            </tr>
+          @end
+        </tbody>
+      </table>
 
-  <div class="flex gap-2">
-    
-    <span class="text-gray-300">|</span>
-    <a href="/admin/dashboard" class="text-gray-400 hover:text-gray-600 transition text-sm">
-      🏠 Dashboard
-    </a>
-  </div>
-</div>
-@end
+      @if(bookings.length == 0)
+        <div class="text-center text-gray-400 py-16">
+          <p class="text-5xl mb-4">📭</p>
+          <p class="font-semibold">Belum ada booking masuk.</p>
+        </div>
+      @end
+    </div>
+  @end
 @end
