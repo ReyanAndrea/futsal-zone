@@ -1,54 +1,60 @@
 @layout('admin/layout')
   @slot('main')
-  <h1 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
-
-  {{-- Stats Cards --}}
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-
-    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
-      <div class="text-4xl">🏟️</div>
-      <div>
-        <p class="text-gray-500 text-sm">Total Lapangan</p>
-        <p class="text-3xl font-bold text-green-700">{{ totalLapangan.$extras.total }}</p>
-      </div>
+    <div class="mb-8">
+      <h1 class="text-3xl font-extrabold text-gray-800">Dashboard</h1>
+      <p class="text-gray-400 mt-1">Selamat datang di panel admin FutsalZone.</p>
     </div>
 
-    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
-      <div class="text-4xl">📋</div>
-      <div>
-        <p class="text-gray-500 text-sm">Total Booking</p>
-        <p class="text-3xl font-bold text-blue-700">{{ totalBooking.$extras.total }}</p>
+    {{-- Stats Cards --}}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+      <div class="bg-white rounded-3xl shadow-md p-6 flex items-center gap-5 border-l-4 border-green-500 hover:shadow-lg transition">
+        <div class="bg-green-100 text-green-700 text-4xl w-16 h-16 rounded-2xl flex items-center justify-center">🏟️</div>
+        <div>
+          <p class="text-gray-400 text-sm">Total Lapangan</p>
+          <p class="text-4xl font-extrabold text-green-700">{{ totalLapangan.$extras.total }}</p>
+        </div>
       </div>
+
+      <div class="bg-white rounded-3xl shadow-md p-6 flex items-center gap-5 border-l-4 border-blue-500 hover:shadow-lg transition">
+        <div class="bg-blue-100 text-blue-700 text-4xl w-16 h-16 rounded-2xl flex items-center justify-center">📋</div>
+        <div>
+          <p class="text-gray-400 text-sm">Total Booking</p>
+          <p class="text-4xl font-extrabold text-blue-700">{{ totalBooking.$extras.total }}</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-3xl shadow-md p-6 flex items-center gap-5 border-l-4 border-yellow-500 hover:shadow-lg transition">
+        <div class="bg-yellow-100 text-yellow-600 text-4xl w-16 h-16 rounded-2xl flex items-center justify-center">⏳</div>
+        <div>
+          <p class="text-gray-400 text-sm">Booking Pending</p>
+          <p class="text-4xl font-extrabold text-yellow-600">{{ pendingBooking.$extras.total }}</p>
+        </div>
+      </div>
+
     </div>
 
-    <div class="bg-white rounded-2xl shadow p-6 flex items-center gap-4">
-      <div class="text-4xl">⏳</div>
-      <div>
-        <p class="text-gray-500 text-sm">Booking Pending</p>
-        <p class="text-3xl font-bold text-yellow-600">{{ pendingBooking.$extras.total }}</p>
-      </div>
+    {{-- Quick Links --}}
+    <h2 class="text-xl font-bold text-gray-700 mb-4">⚡ Aksi Cepat</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <a href="/admin/lapangan"
+        class="bg-white rounded-3xl shadow-md p-6 hover:shadow-lg transition flex items-center gap-5 group">
+        <div class="bg-green-100 text-green-700 text-4xl w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-green-200 transition">🏟️</div>
+        <div>
+          <p class="font-extrabold text-gray-800 text-lg">Kelola Lapangan</p>
+          <p class="text-gray-400 text-sm">Tambah, edit, atau hapus lapangan</p>
+        </div>
+        <span class="ml-auto text-gray-300 group-hover:text-green-500 transition text-2xl">→</span>
+      </a>
+      <a href="/admin/bookings"
+        class="bg-white rounded-3xl shadow-md p-6 hover:shadow-lg transition flex items-center gap-5 group">
+        <div class="bg-blue-100 text-blue-700 text-4xl w-16 h-16 rounded-2xl flex items-center justify-center group-hover:bg-blue-200 transition">📋</div>
+        <div>
+          <p class="font-extrabold text-gray-800 text-lg">Kelola Booking</p>
+          <p class="text-gray-400 text-sm">Konfirmasi atau tolak booking masuk</p>
+        </div>
+        <span class="ml-auto text-gray-300 group-hover:text-blue-500 transition text-2xl">→</span>
+      </a>
     </div>
-
-  </div>
-
-  {{-- Quick Links --}}
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <a href="/admin/lapangan"
-      class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition flex items-center gap-4">
-      <div class="text-4xl">🏟️</div>
-      <div>
-        <p class="font-semibold text-gray-800">Kelola Lapangan</p>
-        <p class="text-gray-400 text-sm">Tambah, edit, atau hapus lapangan</p>
-      </div>
-    </a>
-    <a href="/admin/bookings"
-      class="bg-white rounded-2xl shadow p-6 hover:shadow-lg transition flex items-center gap-4">
-      <div class="text-4xl">📋</div>
-      <div>
-        <p class="font-semibold text-gray-800">Kelola Booking</p>
-        <p class="text-gray-400 text-sm">Konfirmasi atau tolak booking masuk</p>
-      </div>
-    </a>
-  </div>
-@end
+  @end
 @end
