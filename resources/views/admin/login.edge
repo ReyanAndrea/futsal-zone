@@ -6,47 +6,47 @@
   <title>Admin Login - FutsalZone</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-green-50 min-h-screen flex items-center justify-center">
+<body class="bg-gradient-to-br from-green-900 to-green-700 min-h-screen flex items-center justify-center">
 
-  <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
+  <div class="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-md">
 
     <div class="text-center mb-8">
-      <h1 class="text-3xl font-bold text-green-700">⚽ FutsalZone</h1>
-      <p class="text-gray-500 mt-1">Login Admin</p>
+      <div class="text-5xl mb-3">⚽</div>
+      <h1 class="text-3xl font-extrabold text-green-700">FutsalZone</h1>
+      <p class="text-gray-400 mt-1 text-sm">Masuk ke panel admin</p>
     </div>
 
-    {{-- Flash Error --}}
     @if(flashMessages.has('error'))
-      <div class="bg-red-100 text-red-700 px-4 py-3 rounded-xl mb-4 text-sm">
-        {{ flashMessages.get('error') }}
+      <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-5 text-sm flex items-center gap-2">
+        ❌ {{ flashMessages.get('error') }}
       </div>
     @end
 
     <form action="/admin/login" method="POST">
       {{ csrfField() }}
 
-      <div class="mb-4">
-        <label class="block text-gray-700 font-medium mb-1">Email</label>
+      <div class="mb-5">
+        <label class="block text-gray-600 font-semibold mb-2 text-sm">Email</label>
         <input type="email" name="email" required
-          class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50"
           placeholder="admin@futsalzone.com" />
       </div>
 
-      <div class="mb-6">
-        <label class="block text-gray-700 font-medium mb-1">Password</label>
+      <div class="mb-8">
+        <label class="block text-gray-600 font-semibold mb-2 text-sm">Password</label>
         <input type="password" name="password" required
-          class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
+          class="w-full border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-green-500 bg-gray-50"
           placeholder="••••••••" />
       </div>
 
       <button type="submit"
-        class="w-full bg-green-700 text-white py-3 rounded-xl font-semibold hover:bg-green-800 transition">
-        Login
+        class="w-full bg-gradient-to-r from-green-700 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:from-green-800 hover:to-green-700 transition shadow-md">
+        Masuk ke Dashboard
       </button>
     </form>
 
-    <a href="/" class="block text-center text-gray-400 mt-4 hover:text-gray-600 transition text-sm">
-      ← Kembali ke Home
+    <a href="/" class="block text-center text-gray-400 mt-6 hover:text-gray-600 transition text-sm">
+      ← Kembali ke Website
     </a>
 
   </div>
