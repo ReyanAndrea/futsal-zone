@@ -71,10 +71,10 @@ Buka browser di **http://localhost:3333**
 
 ## 🔑 Akun Admin Default
 
-| Field | Value |
-|----------|-------=--------------|
-| Email | admin@futsalzone.com |
-| Password | admin123 |
+| Field    | Value                |
+| -------- | -------------------- |
+| Email    | admin@futsalzone.com |
+| Password | admin123             |
 
 ## 📁 Struktur Folder
 
@@ -102,4 +102,4 @@ futsal-zone/
 
 ## 👨‍💻 Developer
 
-Dibuat untuk memenuhi tugas UAS Mata Kuliah Praktikum Proyek Perangkat Lunak.
+Dibuat untuk memenuhi tugas UAS Mata Kuliah Proyek Perangkat Lunak.
