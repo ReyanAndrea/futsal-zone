@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>FutsalZone - Booking Lapangan Futsal</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    @stack('dumper')
-  </head>
-  <body class="bg-gray-50 min-h-screen">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FutsalZone - Booking Lapangan Futsal</title>
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
+  @stack('dumper')
+</head>
+<body class="bg-gray-50 min-h-screen">
 
-    <nav class="bg-green-700 text-white px-6 py-4 flex justify-between items-center shadow">
-      <a href="/" class="text-2xl font-bold tracking-wide">⚽ FutsalZone</a>
-      <div class="flex gap-4">
-        <a href="/" class="hover:text-green-200 transition">Home</a>
-        <a href="/booking/my" class="hover:text-green-200 transition">My Bookings</a>
-        <a href="/admin/login" class="hover:text-green-200 transition">Admin</a>
-      </div>
-    </nav>
+  {{-- Navbar --}}
+  <nav class="bg-gradient-to-r from-green-900 via-green-800 to-green-700 text-white px-8 py-4 flex justify-between items-center shadow-xl sticky top-0 z-50 border-b border-green-600">
+  <a href="/" class="text-2xl font-extrabold tracking-wide flex items-center gap-3">
+    <span class="bg-white text-green-700 w-9 h-9 rounded-full flex items-center justify-center text-lg shadow">⚽</span>
+    <span>FutsalZone</span>
+  </a>
+  <div class="flex gap-2 items-center text-sm font-medium">
+    <a href="/" class="px-4 py-2 rounded-xl hover:bg-green-700 transition">🏠 Home</a>
+    <a href="/booking/my" class="px-4 py-2 rounded-xl hover:bg-green-700 transition">📋 Booking Saya</a>
+    <a href="/admin/login" class="bg-white text-green-800 px-5 py-2 rounded-full hover:bg-green-100 transition font-bold shadow-md ml-2">
+      Admin →
+    </a>
+  </div>
+</nav>
 
-    @if(flashMessages.has('error'))
-      <div class="bg-red-100 text-red-700 px-6 py-3 text-sm">
-        {{ flashMessages.get('error') }}
-      </div>
-    @end
-    @if(flashMessages.has('success'))
-      <div class="bg-green-100 text-green-700 px-6 py-3 text-sm">
-        {{ flashMessages.get('success') }}
-      </div>
-    @end
+  {{-- Flash Messages --}}
+  @if(flashMessages.has('error'))
+    <div class="bg-red-50 border-l-4 border-red-500 text-red-700 px-6 py-4 text-sm flex items-center gap-2">
+      ❌ {{ flashMessages.get('error') }}
+    </div>
+  @end
+  @if(flashMessages.has('success'))
+    <div class="bg-green-50 border-l-4 border-green-500 text-green-700 px-6 py-4 text-sm flex items-center gap-2">
+      ✅ {{ flashMessages.get('success') }}
+    </div>
+  @end
 
-    <main class="px-6 py-8 max-w-6xl mx-auto">
-      {{{ await $slots.main() }}}
-    </main>
+  <main class="px-6 py-10 max-w-6xl mx-auto">
+    {{{ await $slots.main() }}}
+  </main>
 
-    <footer class="text-center text-gray-400 text-sm py-6 mt-10 border-t">
-      © 2026 FutsalZone. All rights reserved.
-    </footer>
+  <footer class="bg-green-800 text-green-200 text-center text-sm py-6 mt-16">
+    © 2026 FutsalZone. Booking lapangan futsal jadi lebih mudah. 🏟️
+  </footer>
 
-  </body>
+</body>
 </html>
