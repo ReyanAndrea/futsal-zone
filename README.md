@@ -78,27 +78,29 @@ Buka browser di **http://localhost:3333**
 
 ## 📁 Struktur Folder
 
+```text
 futsal-zone/
 ├── app/
-│ ├── controllers/
-│ │ ├── lapangans_controller.ts # Controller public
-│ │ └── admin_controller.ts # Controller admin
-│ └── models/
-│ ├── lapangan.ts
-│ ├── booking.ts
-│ └── user.ts
+│   ├── controllers/
+│   │   ├── lapangans_controller.ts  # Controller public
+│   │   └── admin_controller.ts     # Controller admin
+│   └── models/
+│       ├── lapangan.ts
+│       ├── booking.ts
+│       └── user.ts
 ├── database/
-│ ├── migrations/ # Migration tabel
-│ └── seeders/ # Seeder admin
+│   ├── migrations/
+│   └── seeders/
 ├── resources/
-│ └── views/
-│ ├── components/ # Layout utama
-│ ├── pages/ # Halaman public
-│ └── admin/ # Halaman admin
+│   └── views/
+│       ├── components/
+│       ├── pages/
+│       └── admin/
 ├── public/
-│ └── uploads/ # Foto lapangan
+│   └── uploads/
 └── start/
-└── routes.ts # Semua routes
+    └── routes.ts
+```
 
 ## 👨‍💻 Developer
 
